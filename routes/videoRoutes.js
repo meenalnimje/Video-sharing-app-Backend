@@ -1,0 +1,15 @@
+const express = require("express");
+const router = express.Router();
+const videoController = require("../controllers/videoController");
+const requireUser = require("../middleware/requireUser");
+router.post("/find", videoController.getVideo);
+router.get("/tags", videoController.getByTags);
+router.get("/search", videoController.search);
+router.get("/trends", requireUser, videoController.trendingVideos);
+router.get("/random", requireUser, videoController.randomvideos);
+router.get("/sub", requireUser, videoController.subscribeVideos);
+router.post("/", requireUser, videoController.addVideo);
+router.put("/:id", requireUser, videoController.updateVideo);
+router.put("/view/:id", requireUser, videoController.addView);
+router.delete("/:id", requireUser, videoController.deleteVideo);
+module.exports = router;
